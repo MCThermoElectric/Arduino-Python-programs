@@ -1,5 +1,5 @@
 {
     "port": "COM3",
     "board": "arduino:avr:uno",
-    "sketch": "Arduino Programs\\comms_test_send\\comms_test_send.ino"
+    "sketch": "Arduino Programs\\tmpsnsr\\tempsnsr.ino"
 }
