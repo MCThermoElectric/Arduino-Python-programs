@@ -19,7 +19,9 @@ def collectLine(inputDevice):
 			fullLine += val
 			val = str(inputDevice.read(), 'utf-8')
 		# return the full line that was read from the arduino
-		fullLine = fullLine.rstrip(fullLine[-1])
+		#print(fullLine)
+		fullLine = fullLine[:-2]
+		print(fullLine)
 		return fullLine
 
 def writeLineToFile(line, file):
@@ -29,12 +31,12 @@ arduino = serial.Serial('COM3', 9600)
 dataFile = openFile("datafile")
 
 time1 = time.time()
-writeLineToFile("sensor1, sensor2, sensor3", dataFile)
+writeLineToFile("time,sensor1,sensor2,sensor3", dataFile)
 
-for i in range(0, 30):
+for i in range(0, 15):
 	line = collectLine(arduino)
-	print(line)
-	writeLineToFile(line, dataFile)
+	#print(line)
+	writeLineToFile(str(time.time()) + "\t" + line, dataFile)
 
 print("Total time taken: " + str(time.time() - time1))
 dataFile.close()
