@@ -21,7 +21,7 @@ void loop() {
   int i = 1;
   while(tempSensor.selectNext()) {
     //Serial.print(String(i) + "&");
-    Serial.print(String(tempSensor.getTempC()) + "!");
+    Serial.print(String(tempSensor.getTempC()) + ",");
     i++;
   }
   Serial.println();

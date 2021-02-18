@@ -3,7 +3,7 @@ import serial
 import time
 
 def openFile(fileName):
-	dataFile = open(fileName + time.time() + ".txt", "w")
+	dataFile = open(fileName + str(time.time()) + ".csv", "w")
 	return dataFile
 	
 
@@ -18,16 +18,23 @@ def collectLine(inputDevice):
 		while val != '\n':
 			fullLine += val
 			val = str(inputDevice.read(), 'utf-8')
-			# Print the full line that was read from the arduino
-		line = fullLine.strip().split("!")
-		line.pop()
-		return line
+		# return the full line that was read from the arduino
+		fullLine = fullLine.rstrip(fullLine[-1])
+		return fullLine
 
 def writeLineToFile(line, file):
 	file.write(line + "\n")
 
 arduino = serial.Serial('COM3', 9600)
-while True:
-	dataFile = openFile("datafile.csv")
+dataFile = openFile("datafile")
+
+time1 = time.time()
+writeLineToFile("sensor1, sensor2, sensor3", dataFile)
+
+for i in range(0, 30):
 	line = collectLine(arduino)
+	print(line)
 	writeLineToFile(line, dataFile)
+
+print("Total time taken: " + str(time.time() - time1))
+dataFile.close()
