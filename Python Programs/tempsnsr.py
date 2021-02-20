@@ -36,7 +36,7 @@ writeLineToFile("time,sensor1,sensor2,sensor3", dataFile)
 for i in range(0, 15):
 	line = collectLine(arduino)
 	#print(line)
-	writeLineToFile(str(time.time()) + "\t" + line, dataFile)
+	writeLineToFile(str(time.time()) + "," + line, dataFile)
 
 print("Total time taken: " + str(time.time() - time1))
 dataFile.close()
